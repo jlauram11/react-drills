@@ -14,7 +14,6 @@ class App extends Component {
         'Axel acts here often'
       ],
       userInput: '',
-      filteredStrings: [],
     }
   }
 
@@ -24,28 +23,18 @@ class App extends Component {
     })
   }
 
-  filterArray = (userInput) => {
-    let filteredStrings = [];
-
-    for (let i = 0; i< filteredStrings.length; i++) {
-      let elem = filteredStrings[i];
-      if (elem.includes(`${userInput}`)) {
-        filteredStrings.push(elem)
-      }
-    }
-    return this.setState({
-      filteredStrings: filteredStrings
-    })
-    
-  }
-
   render() {
+    let displayedStrings = this.state.stringArray.filter((elem, i) => {
+      return elem.includes(this.state.userInput);
+    })
+      .map((elem, i) => {
+        return <h2 key={i}>{elem}</h2>
+      })
 
     return (
       <div className="App">
         <input onChange={this.handleChange}/>
-        <button onClick={this.filterArray(this.state.userInput)}>Filter</button>
-        <span>{this.state.filteredStrings}</span>
+        {displayedStrings}
       </div>
     );
   }
