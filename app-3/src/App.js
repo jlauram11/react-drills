@@ -1,18 +1,51 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      stringArray: [ 
+        'John was here',
+        'Mary likes cats',
+        'Hector found cats here',
+        'Julia is fond of soccer',
+        'Axel acts here often'
+      ],
+      userInput: '',
+      filteredStrings: [],
+    }
+  }
+
+  handleChange = (event, value) => {
+    this.setState({
+      userInput: event.target.value
+    })
+  }
+
+  filterArray = (userInput) => {
+    let filteredStrings = [];
+
+    for (let i = 0; i< filteredStrings.length; i++) {
+      let elem = filteredStrings[i];
+      if (elem.includes(`${userInput}`)) {
+        filteredStrings.push(elem)
+      }
+    }
+    return this.setState({
+      filteredStrings: filteredStrings
+    })
+    
+  }
+
   render() {
+
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <input onChange={this.handleChange}/>
+        <button onClick={this.filterArray(this.state.userInput)}>Filter</button>
+        <span>{this.state.filteredStrings}</span>
       </div>
     );
   }
