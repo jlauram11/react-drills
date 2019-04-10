@@ -1,18 +1,29 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {
+  constructor () {
+    super ()
+
+    this.state = {
+      chores: [
+        'vacuum', 
+        'clean bathroom', 
+        'wash dishes',
+        'make dinner',
+        'other chore-like thing'
+      ]
+    }
+  }
+
   render() {
+    const mappedChores = this.state.chores.map((chore, i) => (
+        <p>{chore}</p>
+      ))
+
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        {mappedChores}
       </div>
     );
   }
